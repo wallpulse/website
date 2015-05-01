@@ -17,8 +17,8 @@ test:
     - docker build -t wallpulse/website .
 
 deployment:
-  hub:
-    branch: master
+  docker:
+    branch: production
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push wallpulse/website
