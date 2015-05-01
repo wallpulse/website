@@ -1,0 +1,25 @@
+machine:
+  services:
+    - docker
+  node:
+    version: iojs-v1
+
+dependencies:
+  override:
+    - npm install
+    - docker info
+  cache_directories:
+    - node_modules
+
+test:
+  override:
+    - npm test
+    - docker build -t wallpulse/website .
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push wallpulse/website
+      - ./deploy.sh
