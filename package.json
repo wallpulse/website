@@ -3,15 +3,21 @@
   "private": true,
   "version": "1.0.0",
   "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "standard"
+    "test": "standard",
+    "start": "babel-node index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wallpulse/website.git"
   },
-  "homepage": "http://wallpul.se",
+  "homepage": "https://wallpul.se",
   "devDependencies": {
     "standard": "^3.7.2"
+  },
+  "dependencies": {
+    "babel": "^5.2.6",
+    "hapi": "^8.4.0"
   }
 }
