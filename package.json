@@ -1,23 +1,40 @@
 {
   "name": "website",
-  "private": true,
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "standard",
-    "start": "babel-node index.js"
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
   },
+  "dependencies": {
+    "babel": "^5.2.6",
+    "bootstrap": "^3.3.4",
+    "hapi": "^8.4.0",
+    "react": "^0.13.2",
+    "react-bootstrap": "^0.21.2"
+  },
+  "devDependencies": {
+    "babelify": "^6.0.2",
+    "reactify": "^1.1.0",
+    "standard": "^3.7.2"
+  },
+  "homepage": "https://wallpul.se",
+  "main": "index.js",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wallpulse/website.git"
   },
-  "homepage": "https://wallpul.se",
-  "devDependencies": {
-    "standard": "^3.7.2"
+  "scripts": {
+    "build": "browserify js/index.js > dist/bundle.js",
+    "start": "babel-node index.js",
+    "test": "standard",
+    "watch": "watchify js/index.js -o dist/bundle.js",
+    "copy": "cp node_modules/bootstrap/dist/css/bootstrap.min.css dist/"
   },
-  "dependencies": {
-    "babel": "^5.2.6",
-    "hapi": "^8.4.0"
+  "standard": {
+    "ignore": [
+      "**/dist/**"
+    ]
   }
 }
