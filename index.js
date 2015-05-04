@@ -1,4 +1,9 @@
 import Hapi from 'hapi'
+import React from 'react'
+import { readFileSync } from 'fs'
+import App from './lib'
+
+const template = readFileSync('./dist/index.html').toString()
 
 var server = new Hapi.Server()
 server.connection({
@@ -25,6 +30,15 @@ server.ext('onPreResponse', (request, reply) => {
 
 server.on('response', (request) => {
   console.log(`${request.info.remoteAddress} - ${request.response.statusCode} ${request.method.toUpperCase()} ${request.url.path}`)
+})
+
+server.route({
+  method: 'GET',
+  path: '/',
+  handler: (request, reply) => {
+    const rendered = React.renderToString(<App />)
+    reply(template.replace('<div id="app"></div>', `<div id="app">${rendered}</div>`))
+  }
 })
 
 server.route({
