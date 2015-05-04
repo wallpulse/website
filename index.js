@@ -5,6 +5,13 @@ import App from './lib'
 
 const template = readFileSync('./dist/index.html').toString()
 
+const defaultConfig = {
+  cache: {
+    expiresIn: 30 * 24 * 3600000,
+    privacy: 'public'
+  }
+}
+
 var server = new Hapi.Server()
 server.connection({
   host: '0.0.0.0',
@@ -38,7 +45,8 @@ server.route({
   handler: (request, reply) => {
     const rendered = React.renderToString(<App />)
     reply(template.replace('<div id="app"></div>', `<div id="app">${rendered}</div>`))
-  }
+  },
+  config: defaultConfig
 })
 
 server.route({
@@ -48,7 +56,8 @@ server.route({
     directory: {
       path: 'dist'
     }
-  }
+  },
+  config: defaultConfig
 })
 
 server.start(() => {
