@@ -23,7 +23,7 @@
   },
   "scripts": {
     "build": "npm run clean && npm run copy && npm run build-js",
-    "build-js": "browserify -g uglifyify js/index.js > dist/bundle.js",
+    "build-js": "browserify -g uglifyify lib/client.js > dist/bundle.js",
     "start": "babel-node index.js",
     "test": "standard",
     "watch": "watchify js/index.js -o dist/bundle.js",
