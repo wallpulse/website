@@ -36,7 +36,8 @@ server.ext('onPreResponse', (request, reply) => {
 })
 
 server.on('response', (request) => {
-  console.log(`${request.info.remoteAddress} - ${request.response.statusCode} ${request.method.toUpperCase()} ${request.url.path}`)
+  const ip = request.headers['x-forwarded-for'] || request.info.remoteAddress
+  console.log(`${ip} - ${request.response.statusCode} ${request.method.toUpperCase()} ${request.url.path}`)
 })
 
 server.route({
